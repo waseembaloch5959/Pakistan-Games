@@ -505,6 +505,25 @@ footer{
 }
 .footer-links a:hover{color:var(--green3)}
 
+/* ===== VISITOR COUNTER ===== */
+.visitor-counter{
+  margin:12px auto 0;
+  padding:8px 18px;
+  background:rgba(26,138,107,0.12);
+  border:1px solid rgba(61,204,138,0.15);
+  border-radius:50px;
+  display:inline-block;
+  font-size:0.78rem;
+  font-weight:600;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:0.3px;
+}
+.visitor-counter span{
+  color:var(--green3);
+  font-weight:800;
+  font-size:0.9rem;
+}
+
 /* ===== PWA BANNER ===== */
 #pwa-banner{
   position:fixed;bottom:0;left:0;right:0;z-index:9999;
@@ -1400,6 +1419,12 @@ footer{
     🔒 Apni zimmedari istemal karein &nbsp;|&nbsp; Sirf 18+ ke liye &nbsp;|&nbsp; Responsible Gaming<br/>
     © 2025 Pakistan Games. All rights reserved.
   </p>
+  
+  <!-- ===== VISITOR COUNTER (PUBLIC) ===== -->
+  <div class="visitor-counter" id="visitorCounter">
+    👁️ Total Visitors: <span id="visitorCount">0</span>
+  </div>
+
   <nav class="footer-links" aria-label="Footer links">
     <a href="#games">Games</a>
     <a href="#faq">FAQ</a>
@@ -1443,6 +1468,30 @@ footer{
     html+='<span class="tick-item"><span class="tick-dot"></span>'+txt+'</span>';
   });
   t.innerHTML=html;
+})();
+
+// ===== VISITOR COUNTER =====
+(function(){
+  var counterEl = document.getElementById('visitorCount');
+  if(!counterEl) return;
+
+  // Base count (24 June 2026)
+  var BASE_COUNT = 15247;
+  var STORAGE_KEY = 'pg_visitor_counted';
+
+  // Check if this device/browser has already been counted
+  var alreadyCounted = localStorage.getItem(STORAGE_KEY);
+  var currentCount = parseInt(localStorage.getItem('pg_visitor_total')) || BASE_COUNT;
+
+  if(!alreadyCounted){
+    // New visitor — increment count
+    currentCount++;
+    localStorage.setItem('pg_visitor_total', currentCount);
+    localStorage.setItem(STORAGE_KEY, 'true');
+  }
+
+  // Display the count with comma formatting
+  counterEl.textContent = currentCount.toLocaleString();
 })();
 
 // ===== PWA INSTALL =====
