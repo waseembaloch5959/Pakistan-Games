@@ -1470,26 +1470,32 @@ footer{
   t.innerHTML=html;
 })();
 
-// ===== VISITOR COUNTER (REAL - 0 SE SHURU) =====
+<!-- ===== VISITOR COUNTER (REAL GLOBAL) ===== -->
+<span id="visitorCount">Loading...</span>
+
+<script>
 (function(){
   var counterEl = document.getElementById('visitorCount');
   if(!counterEl) return;
 
-  var BASE_COUNT = 0;  // Real counter — 0 se shuru
-  var STORAGE_KEY = 'pg_visitor_counted';
+  var API_URL = 'https://api.countapi.xyz/hit/pakistanigames.netlify.app/visits';
 
-  var alreadyCounted = localStorage.getItem(STORAGE_KEY);
-  var currentCount = parseInt(localStorage.getItem('pg_visitor_total')) || BASE_COUNT;
+  fetch(API_URL)
+    .then(function(res){
+      return res.json();
+    })
+    .then(function(data){
+      var currentCount = data.value || 0;
 
-  if(!alreadyCounted){
-    currentCount++;
-    localStorage.setItem('pg_visitor_total', currentCount);
-    localStorage.setItem(STORAGE_KEY, 'true');
-  }
+      // Screen par show karega (formatted)
+      counterEl.textContent = currentCount.toLocaleString();
+    })
+    .catch(function(){
+      counterEl.textContent = "0";
+    });
 
-  // ⬇️ YEH LINE MISSING THI — yeh number screen par dikhayegi
-  counterEl.textContent = currentCount.toLocaleString();
 })();
+</script>
 
   // Display the count with comma formatting
   counterEl.textContent = currentCount.toLocaleString();
