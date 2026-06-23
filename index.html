@@ -1470,25 +1470,26 @@ footer{
   t.innerHTML=html;
 })();
 
-// ===== VISITOR COUNTER =====
+// ===== VISITOR COUNTER (REAL - 0 SE SHURU) =====
 (function(){
   var counterEl = document.getElementById('visitorCount');
   if(!counterEl) return;
 
-  // Base count (24 June 2026)
-  var BASE_COUNT = 0;
+  var BASE_COUNT = 0;  // Real counter — 0 se shuru
   var STORAGE_KEY = 'pg_visitor_counted';
 
-  // Check if this device/browser has already been counted
   var alreadyCounted = localStorage.getItem(STORAGE_KEY);
   var currentCount = parseInt(localStorage.getItem('pg_visitor_total')) || BASE_COUNT;
 
   if(!alreadyCounted){
-    // New visitor — increment count
     currentCount++;
     localStorage.setItem('pg_visitor_total', currentCount);
     localStorage.setItem(STORAGE_KEY, 'true');
   }
+
+  // ⬇️ YEH LINE MISSING THI — yeh number screen par dikhayegi
+  counterEl.textContent = currentCount.toLocaleString();
+})();
 
   // Display the count with comma formatting
   counterEl.textContent = currentCount.toLocaleString();
