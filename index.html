@@ -1420,10 +1420,6 @@ footer{
     © 2025 Pakistan Games. All rights reserved.
   </p>
   
-  <!-- ===== VISITOR COUNTER (PUBLIC) ===== -->
-  <div class="visitor-counter" id="visitorCounter">
-    👁️ Total Visitors: <span id="visitorCount">0</span>
-  </div>
 
   <nav class="footer-links" aria-label="Footer links">
     <a href="#games">Games</a>
@@ -1468,37 +1464,6 @@ footer{
     html+='<span class="tick-item"><span class="tick-dot"></span>'+txt+'</span>';
   });
   t.innerHTML=html;
-})();
-
-<!-- ===== VISITOR COUNTER (REAL GLOBAL) ===== -->
-<span id="visitorCount">Loading...</span>
-
-<script>
-(function(){
-  var counterEl = document.getElementById('visitorCount');
-  if(!counterEl) return;
-
-  var API_URL = 'https://api.countapi.xyz/hit/pakistanigames.netlify.app/visits';
-
-  fetch(API_URL)
-    .then(function(res){
-      return res.json();
-    })
-    .then(function(data){
-      var currentCount = data.value || 0;
-
-      // Screen par show karega (formatted)
-      counterEl.textContent = currentCount.toLocaleString();
-    })
-    .catch(function(){
-      counterEl.textContent = "0";
-    });
-
-})();
-</script>
-
-  // Display the count with comma formatting
-  counterEl.textContent = currentCount.toLocaleString();
 })();
 
 // ===== PWA INSTALL =====
