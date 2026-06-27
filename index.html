@@ -1700,5 +1700,31 @@ if('serviceWorker' in navigator){
   });
 }
 </script>
+  <!-- Hidden Audio -->
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Volume Control (chhota sa slider) -->
+<input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.7"
+style="position:fixed; bottom:10px; right:10px; width:120px;">
+
+<script>
+  const music = document.getElementById("bg-music");
+  const volumeControl = document.getElementById("volumeControl");
+
+  // Default volume 70%
+  music.volume = 0.7;
+
+  // Autoplay after first click (browser restriction fix)
+  document.addEventListener("click", function () {
+    music.play();
+  }, { once: true });
+
+  // Volume control
+  volumeControl.addEventListener("input", function () {
+    music.volume = this.value;
+  });
+</script>
 </body>
 </html>
