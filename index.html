@@ -1699,31 +1699,83 @@ if('serviceWorker' in navigator){
       .catch(function(e){console.log('SW:',e);});
   });
 }
-<!-- Hidden Background Music Player -->
-<audio id="bg-music" autoplay loop style="display:none;">
+<!-- ===== HIDDEN BACKGROUND MUSIC (Enhanced) ===== -->
+<audio id="bg-music" loop preload="auto" style="display:none;position:fixed;width:0;height:0;opacity:0;pointer-events:none;">
   <source src="music.mp3" type="audio/mpeg">
+  <source src="music.ogg" type="audio/ogg">
+  <source src="music.wav" type="audio/wav">
 </audio>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var audio = document.getElementById('bg-music');
-    audio.volume = 0.5; // Volume 0 se 1 tak (0.5 = 50%)
+  (function() {
+    'use strict';
     
-    // Agar autoplay block ho toh user interaction par play karein
-    function playAudio() {
-      audio.play().catch(function(e) {
-        console.log('Autoplay blocked, waiting for user interaction');
+    var audio = document.getElementById('bg-music');
+    if (!audio) return;
+    
+    // Volume control (0 to 1) - 30% volume
+    audio.volume = 0.3;
+    
+    var isPlaying = false;
+    var playAttempts = 0;
+    var maxAttempts = 10;
+    
+    // Try to play audio
+    function tryPlay() {
+      if (isPlaying) return;
+      
+      audio.play().then(function() {
+        isPlaying = true;
+        console.log('🎵 Background music started successfully');
+      }).catch(function(e) {
+        console.log('⏳ Autoplay blocked (' + (playAttempts + 1) + '/' + maxAttempts + ')');
+        playAttempts++;
+        
+        // Retry on user interaction
+        if (playAttempts <= maxAttempts) {
+          var events = ['click', 'touchstart', 'keydown', 'scroll', 'mousemove'];
+          events.forEach(function(event) {
+            document.addEventListener(event, function handler() {
+              if (!isPlaying) {
+                audio.play().then(function() {
+                  isPlaying = true;
+                  console.log('🎵 Music started after user interaction');
+                }).catch(function() {});
+              }
+              events.forEach(function(ev) {
+                document.removeEventListener(ev, handler);
+              });
+            }, { once: true });
+          });
+        }
       });
-      document.removeEventListener('click', playAudio);
-      document.removeEventListener('touchstart', playAudio);
     }
     
-    // Agar autoplay na ho toh user click par play karein
-    audio.play().catch(function() {
-      document.addEventListener('click', playAudio);
-      document.addEventListener('touchstart', playAudio);
+    // Start immediately
+    tryPlay();
+    
+    // Keep playing when page becomes visible again
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden && !isPlaying) {
+        tryPlay();
+      }
     });
-  });
+    
+    // Resume if audio stops unexpectedly
+    audio.addEventListener('ended', function() {
+      if (!audio.loop) {
+        audio.currentTime = 0;
+        tryPlay();
+      }
+    });
+    
+    // Handle errors - retry
+    audio.addEventListener('error', function(e) {
+      console.log('⚠️ Audio error, retrying...');
+      setTimeout(tryPlay, 2000);
+    });
+    
+  })();
 </script>
 </body>
 </html>
