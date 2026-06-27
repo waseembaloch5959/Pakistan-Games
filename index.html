@@ -1699,24 +1699,31 @@ if('serviceWorker' in navigator){
       .catch(function(e){console.log('SW:',e);});
   });
 }
-</script>
-<audio id="bg-music" loop>
+<!-- Hidden Background Music Player -->
+<audio id="bg-music" autoplay loop style="display:none;">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  const music = document.getElementById("bg-music");
-  music.volume = 0.7;
-
-  // Touch ya click dono cover karega (mobile + PC)
-  function startMusic() {
-    music.play().catch(() => {});
-    document.removeEventListener("touchstart", startMusic);
-    document.removeEventListener("click", startMusic);
-  }
-
-  document.addEventListener("touchstart", startMusic);
-  document.addEventListener("click", startMusic);
+  document.addEventListener('DOMContentLoaded', function() {
+    var audio = document.getElementById('bg-music');
+    audio.volume = 0.5; // Volume 0 se 1 tak (0.5 = 50%)
+    
+    // Agar autoplay block ho toh user interaction par play karein
+    function playAudio() {
+      audio.play().catch(function(e) {
+        console.log('Autoplay blocked, waiting for user interaction');
+      });
+      document.removeEventListener('click', playAudio);
+      document.removeEventListener('touchstart', playAudio);
+    }
+    
+    // Agar autoplay na ho toh user click par play karein
+    audio.play().catch(function() {
+      document.addEventListener('click', playAudio);
+      document.addEventListener('touchstart', playAudio);
+    });
+  });
 </script>
 </body>
 </html>
