@@ -7,4 +7,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://pakistangames.netlify.app/sitemap.xml
+Sitemap: https://pakistan-games.netlify.app/sitemap.xml
