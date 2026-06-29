@@ -1,10 +1,13 @@
 User-agent: *
 Allow: /
-
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
+
+Disallow: /sw.js
+
+Disallow: /manifest.json
 
 Sitemap: https://pakistangames-786.web.app/sitemap.xml
