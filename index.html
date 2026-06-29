@@ -148,6 +148,37 @@ body{
   -moz-osx-font-smoothing:grayscale;
 }
 
+/* ===== SKIP LINK ===== */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a8a6b;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.skip-link:focus {
+  position: fixed !important;
+  top: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: #1a8a6b !important;
+  color: #fff !important;
+  padding: 14px 28px !important;
+  border-radius: 12px !important;
+  z-index: 99999 !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.6) !important;
+  border: 2px solid rgba(61,204,138,0.4) !important;
+}
+
 /* ===== TICKER ===== */
 .ticker-wrap{
   background:linear-gradient(90deg,#0e6b4f,var(--green),#0e6b4f);
@@ -608,9 +639,10 @@ footer{
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- ===== TICKER ===== -->
-<div class="ticker-wrap" role="marquee" aria-label="Live winning updates">
+<div class="ticker-wrap" role="status" aria-label="Live winning updates">
   <div class="ticker-track" id="ticker"></div>
 </div>
 
@@ -632,7 +664,7 @@ footer{
 <section class="stats" aria-label="Platform statistics">
   <div class="stat">
     <span class="stat-icon">🎮</span>
-    <span class="stat-num">15+</span>
+    <span class="stat-num">39+</span>
     <span class="stat-lbl">Games</span>
   </div>
   <div class="stat">
@@ -658,7 +690,7 @@ footer{
 </section>
 
 <!-- ===== MAIN ===== -->
-<main>
+<main id="main-content">
   <!-- SECTION TITLE -->
   <div class="sec-hd">
     <h2>🕹️ Tamam Games — Abhi Khelen</h2>
@@ -667,7 +699,7 @@ footer{
   </div>
 
   <!-- GAME GRID -->
-  <div class="game-grid" role="list" aria-label="Available games">
+  <div class="game-grid" role="list" aria-label="Available games list - 39 games to play and win real cash">
 <!-- 1: bet939 -->
 <article class="game-card" role="listitem" itemscope itemtype="https://schema.org/SoftwareApplication">
   <meta itemprop="applicationCategory" content="GameApplication"/>
