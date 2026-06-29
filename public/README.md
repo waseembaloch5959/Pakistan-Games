@@ -1,2 +1,0 @@
-# Pakistan-Games
-Pakistan Games
