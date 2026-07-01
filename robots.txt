@@ -1,11 +1,4 @@
 User-agent: *
 Allow: /
 
-Block unnecessary technical files
-
-Disallow: /sw.js
-Disallow: /manifest.json
-
-Sitemap location
-
 Sitemap: https://pakistangames-786.web.app/sitemap.xml
