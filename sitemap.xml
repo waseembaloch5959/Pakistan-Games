@@ -1,18 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">  <!-- Homepage -->  <url>
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">  <url>
     <loc>https://pakistangames-786.web.app/</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>  <!-- Index explicitly -->  <url>
-    <loc>https://pakistangames-786.web.app/index.html</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>  <!-- Optional: add more pages in future like this -->  <!--
-  <url>
-    <loc>https://pakistangames-786.web.app/page-name.html</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  --></urlset>
+  </url></urlset>
